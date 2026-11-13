@@ -1,0 +1,97 @@
+{
+  "name": "sqliter",
+  "displayName": "SQLiter",
+  "description": "Browse and edit SQLite databases in Visual Studio Code.",
+  "version": "0.1.0",
+  "publisher": "rezbouchabou",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "icon": "images/icon.png",
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "database-editor",
+    "sql-editor",
+    "database",
+    "sqlite3",
+    "sqlite",
+    "sqliter",
+    "sql",
+    "db"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rezbouchabou/sqliter"
+  },
+  "bugs": {
+    "url": "https://github.com/rezbouchabou/sqliter/issues"
+  },
+  "homepage": "https://github.com/rezbouchabou/sqliter#readme",
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "sqliteEditor.database",
+        "displayName": "SQLite Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.[sS][qQ][lL][iI][tT][eE]"
+          },
+          {
+            "filenamePattern": "*.[sS][qQ][lL][iI][tT][eE]3"
+          },
+          {
+            "filenamePattern": "*.[dD][bB]"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "sqliteEditor.openDatabase",
+        "title": "SQLite Editor: Open Database"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "sqliteEditor.openDatabase",
+          "when": "resourceScheme == file && !explorerResourceIsFolder && resourceExtname =~ /\\.(sqlite3?|db)$/i",
+          "group": "open"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "SQLite Editor",
+      "properties": {
+        "sqliteEditor.sqlitePath": {
+          "type": "string",
+          "default": "sqlite3",
+          "description": "Path to the SQLite command-line executable."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "npm run build && node --test dist/test/*.test.js",
+    "vscode:prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "vsce": "^1.25.1"
+  },
+  "allowScripts": {
+    "vsce@1.103.1": true,
+    "keytar@7.9.0": true
+  }
+}
